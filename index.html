@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#e9e8e2">
+  <!-- seo:start -->
+  <title>Desarrollo web y software a medida | Noxum Lab</title>
+  <meta name="description" content="Desarrollo web y software a medida para clientes de toda España. Cambios puntuales, tiendas online, SaaS, automatizaciones y chatbots.">
+  <link rel="canonical" href="https://noxumlab.com/">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_ES">
+  <meta property="og:site_name" content="Noxum Lab">
+  <meta property="og:title" content="Desarrollo web y software a medida | Noxum Lab">
+  <meta property="og:description" content="Desarrollo web y software a medida para clientes de toda España. Cambios puntuales, tiendas online, SaaS, automatizaciones y chatbots.">
+  <meta property="og:url" content="https://noxumlab.com/">
+  <meta property="og:image" content="https://noxumlab.com/assets/noxum-social.png">
+  <meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Pieza metálica de Noxum Lab">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Desarrollo web y software a medida | Noxum Lab">
+  <meta name="twitter:description" content="Desarrollo web y software a medida para clientes de toda España. Cambios puntuales, tiendas online, SaaS, automatizaciones y chatbots.">
+  <meta name="twitter:image" content="https://noxumlab.com/assets/noxum-social.png">
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://noxumlab.com/#organization","name":"Noxum Lab","url":"https://noxumlab.com/","email":"info@noxumlab.com","description":"Desarrollo web y software a medida para clientes de toda España. Cambios puntuales, tiendas online, SaaS, automatizaciones y chatbots."},{"@type":"WebSite","@id":"https://noxumlab.com/#website","url":"https://noxumlab.com/","name":"Noxum Lab","inLanguage":"es","publisher":{"@id":"https://noxumlab.com/#organization"}},{"@type":"WebPage","@id":"https://noxumlab.com/#page","url":"https://noxumlab.com/","name":"Desarrollo web y software a medida | Noxum Lab","description":"Desarrollo web y software a medida para clientes de toda España. Cambios puntuales, tiendas online, SaaS, automatizaciones y chatbots.","inLanguage":"es","isPartOf":{"@id":"https://noxumlab.com/#website"}}]}</script>
+  <!-- seo:end -->
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preload" href="/assets/fonts/manrope-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/assets/fonts/anton-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/motion.css">
+  <script type="module" src="/assets/motion.bundle.js"></script>
+  <script src="app.js" defer></script>
+  <script type="module" src="assets/sculpture.bundle.js"></script>
+</head>
+<body class="home-page">
+  <a class="skip-link" href="#contenido">Ir al contenido</a>
+  <header class="header">
+    <a class="wordmark" href="#inicio" aria-label="Noxum Lab, inicio">noxum<span class="wordmark-lab">lab<span class="brand-square"></span></span></a>
+    <nav aria-label="Navegación principal" id="navigation">
+      <a href="#proyectos">Proyectos</a>
+      <a href="#servicios">Qué hago</a>
+      <a href="#laboratorio">El laboratorio</a>
+      <a href="#proceso">Cómo trabajo</a>
+    </nav>
+    <button class="header-contact contact-trigger">Hablemos <span aria-hidden="true">↗</span></button>
+    <button class="menu-toggle" aria-expanded="false" aria-controls="navigation" aria-label="Abrir menú"><span></span><span></span></button>
+  </header>
+
+  <main id="contenido">
+    <section class="hero" id="inicio" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <h1 id="hero-title" class="entrance">NOXUM <span class="hero-title-lab">LAB.</span></h1>
+        <div class="hero-footer">
+        <p class="hero-description entrance">Desarrollo web, software a medida y automatización.<br>De un arreglo puntual a una aplicación completa.</p>
+        <a class="button button-lime entrance" href="#proyectos">Ver proyectos <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+      <div class="hero-art entrance" aria-label="Monograma N metálico interactivo en tres dimensiones">
+        <div class="art-motion"><img src="assets/noxum-fallback.svg" width="600" height="600" alt="" loading="lazy" fetchpriority="low"></div>
+        <canvas id="sculpture-canvas" aria-label="Letra N de metal en 3D. Usa las flechas del teclado o arrastra para girarla." tabindex="0" role="img"></canvas>
+        <span class="art-cross cross-top" aria-hidden="true">+</span><span class="art-cross cross-bottom" aria-hidden="true">+</span>
+      </div>
+      <div class="sculpture-controls" hidden><span id="sculpture-instruction">Ensamblando la N…</span><button type="button" id="sculpture-assemble">Repetir montaje</button><button type="button" id="sculpture-pause" aria-pressed="false">Pausar animación</button><button type="button" id="sculpture-reset" aria-label="Restablecer la posición de la pieza 3D">↺</button></div>
+    </section>
+
+    <section class="quick-start" aria-labelledby="quick-title"><div><h2 id="quick-title">No todo necesita<br>empezar de cero.</h2><p>Una web nueva. Un formulario que falla. Ese proceso que todavía haces a mano. Soy desarrollador y puedo ayudarte a resolverlo.</p></div><a class="project-link" href="/servicios/cambios-y-mejoras-web/">Cambios y mejoras <span aria-hidden="true">↗</span></a></section>
+
+    <section class="projects section" id="proyectos" aria-labelledby="projects-title">
+      <div class="projects-heading reveal"><h2 id="projects-title">Esto ya<br><span class="project-emphasis">funciona.</span></h2><p>Dos proyectos que puedes abrir y conocer.</p></div>
+      <article class="project-case reveal" aria-labelledby="salpi-title">
+        <div class="project-heading"><h3 id="salpi-title">Finques Salpí</h3><a class="project-link" href="/proyectos/finques-salpi/">Ver proyecto <span aria-hidden="true">↗</span></a></div>
+        <a class="project-image" href="https://finquessalpi.com/" target="_blank" rel="noopener noreferrer" aria-label="Visitar Finques Salpí, se abre en una pestaña nueva"><img src="assets/project-salpi.png" width="1265" height="714" loading="lazy" alt="Captura real de la portada de Finques Salpí, con su marca sobre una fotografía de una vivienda."></a>
+        <div class="project-info"><p class="project-category">Web inmobiliaria</p><p class="project-description">Los inmuebles vienen de un XML. La web se encarga de presentarlos.</p><a class="project-live" href="https://finquessalpi.com/" target="_blank" rel="noopener noreferrer">finquessalpi.com ↗</a></div>
+      </article>
+      <article class="project-case reveal" aria-labelledby="nivel-title">
+        <div class="project-heading"><h3 id="nivel-title">Nivel</h3><a class="project-link" href="/proyectos/nivel/">Ver proyecto <span aria-hidden="true">↗</span></a></div>
+        <div class="project-media"><a class="project-image" href="https://reforma.noxumlab.com/" target="_blank" rel="noopener noreferrer" aria-label="Abrir Nivel, se abre en una pestaña nueva"><img src="assets/project-nivel.png" width="1440" height="900" loading="lazy" alt="Captura real de la pantalla de acceso de Nivel, la aplicación de gestión de reformas."></a><p class="project-image-caption">Pantalla pública de acceso a la aplicación.</p></div>
+        <div class="project-info"><p class="project-category">Software a medida</p><p class="project-description">Materiales, presupuestos, tareas y profesionales. Una app para gestionar reformas.</p><a class="project-live" href="https://reforma.noxumlab.com/" target="_blank" rel="noopener noreferrer">Abrir Nivel ↗</a></div>
+      </article>
+    </section>
+
+    <section class="intro section services-index" id="servicios" aria-labelledby="services-title">
+      <div class="intro-heading reveal"><h2 id="services-title">Qué hago.</h2><p>Una web nueva, una aplicación propia o una mejora en lo que ya usas. El alcance lo marca tu proyecto.</p></div>
+      <div class="capabilities">
+        <article class="capability" aria-labelledby="cap-web-title">
+          <h3 id="cap-web-title">Webs<br><span class="capability-secondary">& tiendas.</span></h3>
+          <div class="capability-intro"><p>Para presentar tu negocio, vender online o mejorar una web que ya existe.</p><a class="capability-proof" href="/proyectos/finques-salpi/">Así lo hice en Finques Salpí <span aria-hidden="true">↗</span></a></div>
+          <ul class="capability-services" aria-label="Servicios web">
+            <li><a href="/servicios/desarrollo-web/">Diseño y desarrollo web <span aria-hidden="true">↗</span></a></li>
+            <li><a href="/servicios/tiendas-online/">Tiendas online <span aria-hidden="true">↗</span></a></li>
+            <li><a href="/servicios/cambios-y-mejoras-web/">Cambios y arreglos <span aria-hidden="true">↗</span></a></li>
+            <li><a href="/servicios/mantenimiento-web/">Mantenimiento y SEO técnico <span aria-hidden="true">↗</span></a></li>
+          </ul>
+        </article>
+        <article class="capability" aria-labelledby="cap-software-title">
+          <h3 id="cap-software-title">Software<br><span class="capability-secondary">& SaaS.</span></h3>
+          <div class="capability-intro"><p>Herramientas adaptadas a tu manera de trabajar. O un producto digital para tus propios clientes.</p><a class="capability-proof" href="/proyectos/nivel/">Conoce Nivel <span aria-hidden="true">↗</span></a></div>
+          <ul class="capability-services" aria-label="Servicios de software">
+            <li><a href="/servicios/software-a-medida/">Software a medida <span aria-hidden="true">↗</span></a></li>
+            <li><a href="/servicios/desarrollo-saas-mvp/">SaaS y primeras versiones <span aria-hidden="true">↗</span></a></li>
+          </ul>
+        </article>
+        <article class="capability" aria-labelledby="cap-automation-title">
+          <h3 id="cap-automation-title">Automatización<br><span class="capability-secondary">& IA.</span></h3>
+          <div class="capability-intro"><p>Para conectar tus herramientas, resolver tareas repetitivas y consultar la información de tu negocio.</p></div>
+          <ul class="capability-services" aria-label="Servicios de automatización e IA">
+            <li><a href="/servicios/automatizaciones-integraciones/">Automatizaciones e integraciones <span aria-hidden="true">↗</span></a></li>
+            <li><a href="/servicios/chatbots-ia/">Chatbots y asistentes <span aria-hidden="true">↗</span></a></li>
+          </ul>
+        </article>
+      </div>
+      <div class="services-bottom"><p>También puedes contar conmigo para un encargo puntual.</p><a class="project-link" href="/servicios/">Todos los servicios <span aria-hidden="true">↗</span></a></div>
+    </section>
+
+    <section class="lab section" id="laboratorio" aria-labelledby="lab-title">
+      <div class="lab-heading reveal"><h2 id="lab-title">También<br><span class="lab-emphasis">trasteo.</span></h2><p>Pruebas propias de código, movimiento y tipografía. Tócalas: responden.</p></div>
+      <div class="experiments">
+        <article class="experiment experiment-main reveal">
+          <div class="experiment-stage wave-stage"><canvas id="wave-canvas" aria-label="Superficie de partículas interactiva" role="img"></canvas><div class="wave-word" aria-hidden="true">flow</div><button class="experiment-action" id="wave-toggle" aria-pressed="false">Pausar movimiento <span aria-hidden="true">Ⅱ</span></button></div>
+          <div class="experiment-caption"><div><h3>Campo de partículas</h3><p>Movimiento que responde a ti.</p></div><span>Código creativo</span></div>
+        </article>
+        <article class="experiment experiment-secondary reveal">
+          <div class="experiment-stage type-stage"><div class="type-preview" aria-hidden="true"><span>NOXUM</span><span id="type-word">LAB.</span></div><div class="type-controls" aria-label="Cambia el estilo de la tipografía"><button type="button" data-type="bold" aria-pressed="true">Sólido</button><button type="button" data-type="outline" aria-pressed="false">Contorno</button><button type="button" data-type="italic" aria-pressed="false">Cursiva</button></div></div>
+          <div class="experiment-caption"><div><h3>Prueba de tipografía</h3><p>El mismo nombre, otra expresión.</p></div><span>Diseño interactivo</span></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="process section" id="proceso" aria-labelledby="process-title">
+      <div class="process-intro reveal"><h2 id="process-title">Así<br>trabajo.</h2><p>Un alcance claro antes de empezar y avances que puedes revisar. Ajustamos los pasos al tamaño del encargo.</p></div>
+      <div class="process-steps">
+        <article class="reveal"><h3>Definimos el encargo</h3><p>Revisamos lo que necesitas y acordamos alcance, presupuesto y plazos.</p></article>
+        <article class="reveal"><h3>Revisamos la propuesta</h3><p>Cuando el proyecto lo necesita, vemos el diseño y los recorridos antes de construir.</p></article>
+        <article class="reveal"><h3>Ves el desarrollo</h3><p>Te enseño los avances para que puedas probarlos y comentar los ajustes.</p></article>
+        <article class="reveal"><h3>Recibes el proyecto</h3><p>Preparamos la puesta en marcha, la explicación de uso y el soporte que hayamos acordado.</p></article>
+      </div>
+    </section>
+
+    <section class="contact section" id="contacto" aria-labelledby="contact-title"><div class="contact-top reveal"><h2 id="contact-title">Cuéntame.</h2><button class="contact-circle contact-trigger">Hablemos <span aria-hidden="true">↗</span></button></div><div class="contact-bottom"><p>Qué necesitas. Qué te está dando problemas.<br>O qué te gustaría construir.</p><a class="contact-email" href="mailto:info@noxumlab.com">info@noxumlab.com <span aria-hidden="true">↗</span></a></div></section>
+  </main>
+  <footer class="site-footer"><div class="footer-directory" aria-label="Servicios y contacto"><div><a class="wordmark" href="/" aria-label="Noxum Lab, inicio">noxum<span class="wordmark-lab">lab<span class="brand-square"></span></span></a><p>Desde un cambio puntual<br>hasta un proyecto completo.</p><a class="footer-email" href="mailto:info@noxumlab.com">info@noxumlab.com ↗</a></div><nav aria-label="Servicios"><a href="/servicios/cambios-y-mejoras-web/">Cambios y mejoras web</a><a href="/servicios/desarrollo-web/">Diseño y desarrollo web</a><a href="/servicios/tiendas-online/">Tiendas online</a><a href="/servicios/software-a-medida/">Software a medida</a><a href="/servicios/desarrollo-saas-mvp/">SaaS y MVP</a><a href="/servicios/automatizaciones-integraciones/">Automatizaciones e integraciones</a><a href="/servicios/chatbots-ia/">Chatbots y asistentes de IA</a><a href="/servicios/mantenimiento-web/">Mantenimiento y optimización web</a></nav><nav aria-label="Sobre Noxum Lab"><a href="/servicios/">Todos los servicios</a><a href="/#proyectos">Proyectos</a><a href="/sobre-noxum-lab/">Sobre Noxum Lab</a><a href="/contacto/">Contacto</a></nav></div><div class="footer-base"><p>Desarrollo independiente para clientes de toda España.</p><a href="#contenido">Volver arriba ↑</a></div></footer>
+
+  <dialog id="contact-dialog" aria-labelledby="dialog-title"><div class="dialog-top"><span class="section-caption">Una idea es un buen comienzo.</span><button class="dialog-close" type="button" aria-label="Cerrar formulario">×</button></div><h2 id="dialog-title">¿Qué tienes<br>en mente?</h2><p class="dialog-description">Prepara tu consulta para info@noxumlab.com. El formulario abre tu aplicación de correo; revisa el mensaje y envíalo desde allí.</p><form id="brief-form"><label>Tu nombre<input name="name" autocomplete="name" required placeholder="¿Cómo te llamas?" maxlength="100"></label><label>¿Qué necesitas?<select name="service"><option>Cambios, arreglos o nuevas funciones</option><option>Diseño y desarrollo web</option><option>Ecommerce</option><option>SaaS o producto digital</option><option>Software a medida</option><option>Automatizaciones e integraciones</option><option>Chatbot o asistente de IA</option><option>Mejorar un proyecto existente</option><option>Todavía no lo tengo claro</option></select></label><label>Cuéntame un poco más<textarea name="idea" rows="3" required minlength="10" maxlength="3000" placeholder="La idea, el problema que quieres resolver, tus plazos…"></textarea></label><div class="dialog-actions"><button class="button button-lime" type="submit">Preparar correo <span aria-hidden="true">↗</span></button><button class="button button-muted" type="button" id="copy-brief">Copiar resumen</button></div><p id="form-status" role="status" aria-live="polite"></p></form></dialog>
+</body>
+</html>

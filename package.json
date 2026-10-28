@@ -1,0 +1,22 @@
+{
+  "name": "noxum-lab",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node server.mjs",
+    "predev": "npm run build",
+    "prepare": "node scripts/build-site.mjs",
+    "build": "node scripts/build-site.mjs",
+    "check": "node --check app.js && node --check motion.js && node --check sculpture.js && node --check monogram-geometry.js && node --check assembly-timeline.js && node --check server.mjs && node scripts/check-site.mjs"
+  },
+  "dependencies": {
+    "@fontsource-variable/manrope": "^5.3.0",
+    "@fontsource/anton": "^5.3.0",
+    "gsap": "^3.15.0",
+    "three": "^0.186.1"
+  },
+  "devDependencies": {
+    "esbuild": "^0.28.2"
+  }
+}
