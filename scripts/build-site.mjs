@@ -49,6 +49,23 @@ const assets={
   '/app.js':outputFor('app.js'),
   '/styles.css':outputFor('site.css')
 };
+// Version the icon URL so browsers pick up a changed brand mark immediately.
+const favicon=await readFile(path.join(root,'assets/favicon.svg'));
+const faviconHash=createHash('sha256').update(favicon).digest('hex').slice(0,10);
+for(const [name,size] of [['favicon',0],['favicon-32',32],['apple-touch-icon',180]]) {
+  const extension=size?'png':'svg';
+  const url=`/assets/${name}-${faviconHash}.${extension}`;
+  const data=size?await sharp(favicon).resize(size,size).png().toBuffer():favicon;
+  await writeFile(path.join(dist,url.slice(1)),data);
+  assets[`/assets/${name}.${extension}`]=url;
+}
+const faviconPng=await sharp(favicon).resize(32,32).png().toBuffer();
+const icoHeader=Buffer.alloc(22);
+icoHeader.writeUInt16LE(1,2); icoHeader.writeUInt16LE(1,4);
+icoHeader[6]=32; icoHeader[7]=32;
+icoHeader.writeUInt16LE(1,10); icoHeader.writeUInt16LE(32,12);
+icoHeader.writeUInt32LE(faviconPng.length,14); icoHeader.writeUInt32LE(22,18);
+await writeFile(path.join(dist,'favicon.ico'),Buffer.concat([icoHeader,faviconPng]));
 const images=new Map();
 for(const name of ['project-salpi','project-nivel','project-salpi-catalog','noxum-poster']) {
   const input=path.join(root,'assets',name+'.png');
