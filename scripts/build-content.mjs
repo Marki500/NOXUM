@@ -69,9 +69,10 @@ for (const s of services) {
     breadcrumbs:[{name:'Inicio',path:'/'},{name:'Servicios',path:'/servicios/'},{name:s.name,path:urlForService(s.slug)}],
     mainEntity:{'@type':'Service',name:s.name,serviceType:s.name,description:s.description,provider:{'@id':organization['@id']},areaServed:{'@type':'Country',name:'España'},url:absolute(urlForService(s.slug))},
     content:`<section class="detail-hero"><p class="detail-label">${e(s.name)}</p><h1>${e(s.heading)}</h1><p class="detail-lead">${e(s.lead)}</p><button class="button button-lime contact-trigger">Hablar de mi proyecto <span aria-hidden="true">↗</span></button></section>
-    <section class="detail-section"><h2>Empezamos por tu necesidad.</h2><p class="section-intro">${e(s.context)}</p>${scope(s.includes)}</section>
+    <section class="detail-section"><h2>${e(s.scopeTitle || 'Empezamos por tu necesidad.')}</h2><p class="section-intro">${e(s.context)}</p>${scope(s.includes)}</section>
     <section class="detail-note"><h2>¿Por dónde empezamos?</h2><p>${e(s.needs)}</p></section>
     ${s.project ? projectPreview(s.project) : ''}
+${(s.sections || []).map(section=>`<section class="detail-section"><h2>${e(section.heading)}</h2><p class="section-intro">${e(section.intro)}</p>${section.items ? scope(section.items) : ''}</section>`).join('')}
     <section class="detail-section detail-faq"><h2>Antes de empezar.</h2>${s.faq.map(([q,a])=>`<details><summary>${e(q)}<span aria-hidden="true">+</span></summary><p>${e(a)}</p></details>`).join('')}</section>
     <section class="detail-section"><h2>También puedo ayudarte con…</h2>${serviceLinks(s.related)}</section>`});
 }
