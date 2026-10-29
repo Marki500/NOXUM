@@ -19,7 +19,7 @@ for(const [family, files] of [
   for(const file of files) await cp(path.join(root,'node_modules',family,'files',file),path.join(dist,'assets/fonts',file));
   await cp(path.join(root,'node_modules',family,'LICENSE'),path.join(dist,'assets/fonts',family.includes('manrope')?'Manrope-LICENSE.txt':'Anton-LICENSE.txt'));
 }
-for(const file of ['index.html','404.html','robots.txt','sitemap.xml','servicios','proyectos','sobre-noxum-lab','contacto']) {
+for(const file of ['index.html','404.html','robots.txt','sitemap.xml','servicios','proyectos','sobre-noxum-lab','contacto','blog']) {
   await cp(path.join(root,file),path.join(dist,file),{recursive:true});
 }
 await cp(path.join(root,'assets'),path.join(dist,'assets'),{recursive:true,

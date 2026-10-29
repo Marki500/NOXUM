@@ -160,6 +160,28 @@ h1,h2{font-family:Anton,Impact,sans-serif;font-weight:400;text-transform:upperca
 .footer-base{border-color:#55564f;font-size:10px;margin-top:55px;color:#bfc0b5}
 .footer-base p{font-size:10px}
 .detail-main{max-width:none;overflow-x:clip}
+.detail-page.article-page h1{font-size:clamp(60px,8.2vw,112px);max-width:1050px}
+.article-meta{margin-top:24px;font-size:12px;line-height:1.8;color:#62635e}
+.article-layout{display:grid;grid-template-columns:minmax(180px,1fr) minmax(0,760px);gap:7vw;max-width:1150px;margin-bottom:80px}
+.article-toc{border-top:1px solid #bebeb4;padding-top:24px;align-self:start}
+.article-toc>p{font-weight:700;font-size:13px;margin-bottom:18px}
+.article-toc ol{padding-left:20px;font-size:13px;line-height:1.7}
+.article-toc li+li{margin-top:14px}
+.article-toc a:hover,.article-link:hover{text-decoration:underline}
+.article-copy>section{padding-block:36px;border-top:1px solid #bebeb4;scroll-margin-top:100px}
+.article-copy h2{font-family:Anton,Impact,sans-serif;font-weight:400;text-transform:uppercase;font-size:clamp(30px,3.5vw,46px);line-height:1.2;letter-spacing:-.015em;margin-bottom:25px}
+.article-copy p{font-size:16px;line-height:1.95;color:#55564f}
+.article-copy p+p{margin-top:20px}
+.article-copy .article-summary{font-size:20px;color:#20211f;line-height:1.65;margin-bottom:36px}
+.article-copy a,.article-link{color:#a82d19;text-decoration:underline;text-underline-offset:4px}
+.article-copy .article-source{font-size:13px}
+.article-checklist{list-style:none;padding:0;margin-top:28px}
+.article-checklist li{padding-block:22px;border-top:1px solid #bebeb4}
+.article-checklist h3{font:700 19px/1.4 Manrope,Arial,sans-serif;margin-bottom:10px}
+.article-sources ul{padding-left:20px;margin-top:24px;font-size:14px;line-height:1.8}
+.article-sources li+li{margin-top:12px}
+.article-copy .related-services{margin-top:26px}
+@media(max-width:767px){.detail-page.article-page h1{font-size:clamp(44px,11vw,70px)}.article-layout{grid-template-columns:1fr;gap:38px;margin-bottom:35px}.article-copy p{font-size:15px}.article-copy .article-summary{font-size:18px}.article-copy>section{padding-block:30px}.article-toc ol{font-size:14px}.article-meta{font-size:11px}.article-page .detail-hero{padding-bottom:45px}}
 .breadcrumbs{padding-top:28px;font-size:11px;color:#62635e}
 .breadcrumbs li:not(:last-child)::after{color:#7b7c72}
 .detail-hero{padding-top:55px;padding-bottom:90px;position:relative}

@@ -1,11 +1,14 @@
 import {readFile, writeFile, mkdir, stat} from 'node:fs/promises';
 import {site, services, projects, projectStories} from '../content/site.js';
+import {articles} from '../content/articles.js';
 
 const root = new URL('../', import.meta.url);
 const e = text => String(text).replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
 const absolute = path => new URL(path, site.url).href;
 const urlForService = slug => `/servicios/${slug}/`;
 const urlForProject = slug => `/proyectos/${slug}/`;
+const urlForArticle = slug => `/blog/${slug}/`;
+const readableDate = date => new Intl.DateTimeFormat('es-ES',{day:'numeric',month:'long',year:'numeric',timeZone:'Europe/Madrid'}).format(new Date(`${date}T12:00:00Z`));
 let home = await readFile(new URL('index.html', root), 'utf8');
 const header = home.match(/<header class="header">[\s\S]*?<\/header>/)[0].replaceAll('href="#', 'href="/#');
 const dialog = home.match(/<dialog id="contact-dialog"[\s\S]*?<\/dialog>/)[0];
@@ -20,7 +23,8 @@ function seo({path, title, description, breadcrumbs = [], mainEntity, image = '/
   <meta name="description" content="${e(description)}">
   <link rel="canonical" href="${canonical}">
   <meta name="robots" content="index,follow,max-image-preview:large">
-  <meta property="og:type" content="website">
+  <meta property="og:type" content="${mainEntity?.['@type']==='BlogPosting' ? 'article' : 'website'}">
+${mainEntity?.['@type']==='BlogPosting' ? `  <meta property="article:published_time" content="${e(mainEntity.datePublished)}"><meta property="article:modified_time" content="${e(mainEntity.dateModified)}">` : ''}
   <meta property="og:locale" content="es_ES">
   <meta property="og:site_name" content="${site.name}">
   <meta property="og:title" content="${e(title)}">
@@ -36,7 +40,7 @@ function seo({path, title, description, breadcrumbs = [], mainEntity, image = '/
   <script type="application/ld+json">${JSON.stringify({'@context':'https://schema.org','@graph':graph}).replaceAll('<','\\u003c')}</script>`;
 }
 
-const directory = `<div class="footer-directory" aria-label="Servicios y contacto"><div><a class="wordmark" href="/" aria-label="Noxum Lab, inicio">noxum<span class="wordmark-lab">lab<span class="brand-square"></span></span></a><p>Desde un cambio puntual<br>hasta un proyecto completo.</p><a class="footer-email" href="mailto:${site.email}">${site.email} ↗</a></div><nav aria-label="Servicios">${services.map(s=>`<a href="${urlForService(s.slug)}">${e(s.name)}</a>`).join('')}</nav><nav aria-label="Sobre Noxum Lab"><a href="/servicios/">Todos los servicios</a><a href="/#proyectos">Proyectos</a><a href="/sobre-noxum-lab/">Sobre Noxum Lab</a><a href="/contacto/">Contacto</a></nav></div>`;
+const directory = `<div class="footer-directory" aria-label="Servicios y contacto"><div><a class="wordmark" href="/" aria-label="Noxum Lab, inicio">noxum<span class="wordmark-lab">lab<span class="brand-square"></span></span></a><p>Desde un cambio puntual<br>hasta un proyecto completo.</p><a class="footer-email" href="mailto:${site.email}">${site.email} ↗</a></div><nav aria-label="Servicios">${services.map(s=>`<a href="${urlForService(s.slug)}">${e(s.name)}</a>`).join('')}</nav><nav aria-label="Sobre Noxum Lab"><a href="/servicios/">Todos los servicios</a><a href="/#proyectos">Proyectos</a><a href="/blog/">Blog</a><a href="/sobre-noxum-lab/">Sobre Noxum Lab</a><a href="/contacto/">Contacto</a></nav></div>`;
 const footer = `<footer class="site-footer">${directory}<div class="footer-base"><p>Desarrollo independiente para clientes de toda España.</p><a href="#contenido">Volver arriba ↑</a></div></footer>`;
 const route = crumbs => `<nav class="breadcrumbs" aria-label="Ruta de navegación"><ol>${crumbs.map((c,i)=>`<li>${i===crumbs.length-1 ? `<span aria-current="page">${e(c.name)}</span>` : `<a href="${c.path}">${e(c.name)}</a>`}</li>`).join('')}</ol></nav>`;
 const cta = `<section class="detail-cta"><p>Un cambio pequeño también es un proyecto.</p><h2>Cuéntame qué necesitas.</h2><button class="button button-lime contact-trigger">Preparar consulta <span aria-hidden="true">↗</span></button><a href="mailto:${site.email}">${site.email}</a></section>`;
@@ -58,7 +62,7 @@ async function page(config) {
 <html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#e9e8e2">
 ${seo(config)}
 <link rel="icon" href="/assets/favicon-32.png" type="image/png" sizes="32x32"><link rel="icon" href="/assets/favicon.svg" type="image/svg+xml" sizes="any"><link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" sizes="180x180"><link rel="preload" href="/assets/fonts/anton-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/assets/fonts/manrope-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="/styles.css"><link rel="stylesheet" href="/motion.css"><script type="module" src="/app.js"></script><script type="module" src="/assets/site-loader.js"></script></head>
-<body class="detail-page"${config.form ? ` data-service="${e(config.form)}"` : ''}><a class="skip-link" href="#contenido">Ir al contenido</a>${header}<main id="contenido" class="detail-main">${route(config.breadcrumbs)}${config.content}${config.cta ?? cta}</main>${footer}${dialog}</body></html>`;
+<body class="detail-page${config.article ? ' article-page' : ''}"${config.form ? ` data-service="${e(config.form)}"` : ''}><a class="skip-link" href="#contenido">Ir al contenido</a>${header}<main id="contenido" class="detail-main">${route(config.breadcrumbs)}${config.content}${config.cta ?? cta}</main>${footer}${dialog}</body></html>`;
   const file = `${config.path.slice(1)}index.html`;
   await writeChanged(file,html);
   generated.push({path:config.path,file});
@@ -74,6 +78,7 @@ for (const s of services) {
     ${s.project ? projectPreview(s.project) : ''}
 ${(s.sections || []).map(section=>`<section class="detail-section"><h2>${e(section.heading)}</h2><p class="section-intro">${e(section.intro)}</p>${section.items ? scope(section.items) : ''}</section>`).join('')}
     <section class="detail-section detail-faq"><h2>Antes de empezar.</h2>${s.faq.map(([q,a])=>`<details><summary>${e(q)}<span aria-hidden="true">+</span></summary><p>${e(a)}</p></details>`).join('')}</section>
+${s.slug==='mantenimiento-web' ? `<aside class="detail-note"><h2>Una revisión a tiempo.</h2><p>${e(articles[0].summary)}</p><p><a class="article-link" href="${urlForArticle(articles[0].slug)}">${e(articles[0].headline)} ↗</a></p></aside>` : ''}
     <section class="detail-section"><h2>También puedo ayudarte con…</h2>${serviceLinks(s.related)}</section>`});
 }
 
@@ -93,6 +98,23 @@ for (const p of projects) {
     <section class="detail-section"><h2>Servicios relacionados.</h2>${serviceLinks(p.services)}</section>
     <nav class="case-next" aria-label="Otro proyecto"><a href="${urlForProject(next.slug)}"><span>Otro proyecto</span><strong>${e(next.name)}</strong><span aria-hidden="true">↗</span></a></nav>`});
 }
+
+for (const a of articles) {
+  const articlePath=urlForArticle(a.slug);
+  await page({path:articlePath,title:a.title,description:a.description,article:true,form:'Mejorar un proyecto existente',
+    breadcrumbs:[{name:'Inicio',path:'/'},{name:'Blog',path:'/blog/'},{name:'Fallo crítico en PHP',path:articlePath}],
+    mainEntity:{'@type':'BlogPosting','@id':absolute(articlePath)+'#article',headline:a.headline,description:a.description,datePublished:a.published,dateModified:a.modified,inLanguage:'es',author:{'@id':organization['@id']},publisher:{'@id':organization['@id']},mainEntityOfPage:{'@id':absolute(articlePath)+'#page'},image:absolute('/assets/noxum-social.png'),citation:a.sources.map(([,url])=>url)},
+    content:`<article><header class="detail-hero"><p class="detail-label">${e(a.category)}</p><h1>${e(a.heading)}</h1><p class="detail-lead">${e(a.lead)}</p><p class="article-meta">Por Noxum Lab · Publicado el <time datetime="${a.published}">${readableDate(a.published)}</time></p></header>
+    <div class="article-layout"><nav class="article-toc" aria-label="En este artículo"><p>En este artículo</p><ol>${a.sections.map(s=>`<li><a href="#${s.id}">${e(s.heading)}</a></li>`).join('')}</ol></nav>
+    <div class="article-copy"><p class="article-summary">${e(a.summary)}</p>
+    ${a.sections.map(s=>`<section id="${s.id}"><h2>${e(s.heading)}</h2>${s.paragraphs.map(p=>`<p>${e(p)}</p>`).join('')}${s.id==='que-ha-pasado' ? `<p class="article-source">Fuente: <a href="${a.sources[0][1]}">aviso oficial del proyecto PHP</a>.</p>` : ''}${s.items ? `<ul class="article-checklist">${s.items.map(([title,text])=>`<li><h3>${e(title)}</h3><p>${e(text)}</p></li>`).join('')}</ul>` : ''}</section>`).join('')}
+    <section class="article-sources"><h2>Fuentes y fecha de revisión.</h2><p>Información revisada el <time datetime="${a.modified}">${readableDate(a.modified)}</time>. Para el estado actual de los parches, consulta los avisos oficiales y a tu proveedor.</p><ul>${a.sources.map(([title,url])=>`<li><a href="${url}">${e(title)}</a></li>`).join('')}</ul></section>
+    <section><h2>Cómo puedo ayudarte.</h2><p>Comparte la dirección de tu web y qué necesitas revisar. Antes de intervenir, concretamos los accesos necesarios, el alcance y el presupuesto.</p>${serviceLinks(['mantenimiento-web','cambios-y-mejoras-web','desarrollo-web'])}</section></div></div></article>`,
+    cta:`<section class="detail-cta"><p>Un encargo puntual también tiene sitio.</p><h2>¿Revisamos tu web?</h2><button class="button button-lime contact-trigger">Preparar consulta <span aria-hidden="true">↗</span></button><a href="mailto:${site.email}">${site.email}</a></section>`});
+}
+await page({path:'/blog/',type:'CollectionPage',title:'Blog de desarrollo y mantenimiento web | Noxum Lab',description:'Notas de Noxum Lab sobre desarrollo, mantenimiento y decisiones para tu web. Explicaciones prácticas con fuentes y ejemplos.',
+  breadcrumbs:[{name:'Inicio',path:'/'},{name:'Blog',path:'/blog/'}],
+  content:`<section class="detail-hero"><p class="detail-label">Blog de Noxum Lab</p><h1>Notas del lab.</h1><p class="detail-lead">Desarrollo, mantenimiento y decisiones que afectan a tu web. Explicadas para que puedas dar el siguiente paso.</p></section><section class="detail-section service-directory" aria-label="Artículos">${articles.map(a=>`<a href="${urlForArticle(a.slug)}"><div><p class="detail-label">${e(a.category)} · <time datetime="${a.published}">${readableDate(a.published)}</time></p><h2>${e(a.headline)}</h2><p>${e(a.summary)}</p></div><span aria-hidden="true">↗</span></a>`).join('')}</section>`});
 
 const groups=[...new Set(services.map(s=>s.group))];
 await page({path:'/servicios/',title:'Servicios de desarrollo web, software e IA | Noxum Lab',description:'Explora los servicios de Noxum Lab: arreglos puntuales, desarrollo web, ecommerce, software personalizado, SaaS, automatización y asistentes de IA.',
