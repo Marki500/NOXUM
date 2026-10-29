@@ -46,6 +46,13 @@ h1,h2{font-family:Anton,Impact,sans-serif;font-weight:400;text-transform:upperca
 .art-cross{display:none}
 .art-motion{mix-blend-mode:multiply}
 .art-motion img{mix-blend-mode:multiply;mask-image:none}
+.hero .entrance{animation:none}
+.hero-art .art-motion{height:100%;animation:none;will-change:auto}
+.hero-art .art-motion img{height:100%;object-fit:contain}
+.sculpture-launch{position:absolute;bottom:4%;left:50%;transform:translateX(-50%);z-index:4;min-height:44px;padding:10px 16px;background:var(--text);color:var(--bg);font:600 11px Manrope,Arial,sans-serif;white-space:nowrap;border:1px solid var(--text);border-radius:0}
+.sculpture-launch:hover{background:var(--orange);color:var(--text)}
+.sculpture-launch:disabled{cursor:progress}
+.sculpture-launch[hidden]{display:none}
 .sculpture-controls{bottom:6%;left:50%;transform:translateX(-50%);width:max-content;display:flex;gap:10px;color:var(--text);font-family:Manrope,Arial,sans-serif;font-size:10px}
 .sculpture-controls>span{display:none}
 .sculpture-controls button{background:var(--bg);border:1px solid #b7b7ab;color:var(--text);border-radius:0;padding:8px 10px;font:10px Manrope,Arial,sans-serif}

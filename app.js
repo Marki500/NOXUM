@@ -140,7 +140,7 @@ function resizeCanvas() {
   canvas.width = Math.round(width * dpr);
   canvas.height = Math.round(height * dpr);
   ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-  drawWave();
+  if (visible) drawWave();
 }
 function drawWave() {
   ctx.clearRect(0, 0, width, height);
@@ -160,7 +160,10 @@ function drawWave() {
   }
 }
 let lastTime = 0;
+let lastWaveFrame = 0;
 function animateWave(now) {
+  if (now-lastWaveFrame < 1000/30) { frame=requestAnimationFrame(animateWave); return; }
+  lastWaveFrame=now;
   if (!lastTime) lastTime = now;
   const delta = Math.min(now - lastTime, 50);
   lastTime = now;
@@ -176,7 +179,7 @@ function syncAnimation() {
   toggle.setAttribute('aria-pressed', String(paused));
   toggle.innerHTML = reducedMotion.matches ? 'Movimiento reducido' : paused ? 'Activar movimiento <span aria-hidden="true">▷</span>' : 'Pausar movimiento <span aria-hidden="true">Ⅱ</span>';
   if (visible && !document.hidden && !paused) frame = requestAnimationFrame(animateWave);
-  else drawWave();
+  else if (visible && !document.hidden) drawWave();
 }
 toggle.addEventListener('click', () => { userPaused = !userPaused; syncAnimation(); });
 canvas.addEventListener('pointermove', event => {

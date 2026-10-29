@@ -126,25 +126,13 @@ function startMotion() {
   const mm = gsap.matchMedia();
   mm.add('(prefers-reduced-motion: no-preference)', () => {
     const context = gsap.context(() => {
-      const incoming = document.querySelector('main h1');
-      if (incoming) {
-        const words = wrapWords(incoming);
-        const intro = gsap.timeline({delay:.1});
-        intro.fromTo(words, {yPercent:115, rotate:3}, {yPercent:0, rotate:0, duration:1.2, stagger:.065, ease:'power4.out'});
-        for (const [selector, y, duration, position] of [
-          ['.hero-copy .eyebrow, .detail-hero .detail-label',15,.7,.1],
-          ['.hero-description, .detail-lead',28,.9,.35],
-          ['.hero-copy .button, .detail-hero .button, .detail-hero .contact-address',30,.8,.5]
-        ]) {
-          const targets = document.querySelectorAll(selector);
-          if(targets.length)intro.fromTo(targets,{y,opacity:0},{y:0,opacity:1,duration,stagger:.08},position);
-        }
-      }
+      // Never hide or split the initial heading: it is part of the first paint.
       if (!nativeRoutes && document.referrer && new URL(document.referrer).origin === location.origin) {
         gsap.fromTo(curtain, {yPercent:0}, {yPercent:-100, duration:.7, ease:'power4.inOut', delay:.05});
       }
 
       document.querySelectorAll('.quick-start h2, .projects-heading h2, .project-heading h3, .intro-heading h2, .capability h3, .lab-heading h2, .process-intro h2, .contact h2, .detail-section>h2, .detail-cta h2').forEach(heading => {
+        if (heading.getBoundingClientRect().top < innerHeight) return;
         const words = wrapWords(heading);
         gsap.fromTo(words, {yPercent:108, rotate:2}, {yPercent:0, rotate:0, duration:1, ease:'power4.out', stagger:.045, scrollTrigger:{trigger:heading,start:'top 91%',once:true}});
       });

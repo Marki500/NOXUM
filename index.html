@@ -29,9 +29,8 @@
   <link rel="preload" href="/assets/fonts/manrope-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/anton-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="/motion.css">
-  <script type="module" src="/assets/motion.bundle.js"></script>
-  <script src="app.js" defer></script>
-  <script type="module" src="assets/sculpture.bundle.js"></script>
+  <script type="module" src="/assets/site-loader.js"></script>
+  <script type="module" src="app.js"></script>
 </head>
 <body class="home-page">
   <a class="skip-link" href="#contenido">Ir al contenido</a>
@@ -57,8 +56,9 @@
         </div>
       </div>
       <div class="hero-art entrance" aria-label="Monograma N metálico interactivo en tres dimensiones">
-        <div class="art-motion"><img src="assets/noxum-fallback.svg" width="600" height="600" alt="" loading="lazy" fetchpriority="low"></div>
+        <div class="art-motion"><img src="assets/noxum-poster.webp" width="720" height="720" alt="" fetchpriority="high"></div>
         <canvas id="sculpture-canvas" aria-label="Letra N de metal en 3D. Usa las flechas del teclado o arrastra para girarla." tabindex="0" role="img"></canvas>
+        <button type="button" id="sculpture-launch" class="sculpture-launch" hidden>Explorar en 3D ↗</button>
         <span class="art-cross cross-top" aria-hidden="true">+</span><span class="art-cross cross-bottom" aria-hidden="true">+</span>
       </div>
       <div class="sculpture-controls" hidden><span id="sculpture-instruction">Ensamblando la N…</span><button type="button" id="sculpture-assemble">Repetir montaje</button><button type="button" id="sculpture-pause" aria-pressed="false">Pausar animación</button><button type="button" id="sculpture-reset" aria-label="Restablecer la posición de la pieza 3D">↺</button></div>

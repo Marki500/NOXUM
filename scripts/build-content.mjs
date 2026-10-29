@@ -57,7 +57,7 @@ async function page(config) {
   const html=`<!doctype html>
 <html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#e9e8e2">
 ${seo(config)}
-<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml"><link rel="preload" href="/assets/fonts/anton-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/assets/fonts/manrope-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="/styles.css"><link rel="stylesheet" href="/motion.css"><script src="/app.js" defer></script><script type="module" src="/assets/motion.bundle.js"></script></head>
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml"><link rel="preload" href="/assets/fonts/anton-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin><link rel="preload" href="/assets/fonts/manrope-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin><link rel="stylesheet" href="/styles.css"><link rel="stylesheet" href="/motion.css"><script type="module" src="/app.js"></script><script type="module" src="/assets/site-loader.js"></script></head>
 <body class="detail-page"${config.form ? ` data-service="${e(config.form)}"` : ''}><a class="skip-link" href="#contenido">Ir al contenido</a>${header}<main id="contenido" class="detail-main">${route(config.breadcrumbs)}${config.content}${config.cta ?? cta}</main>${footer}${dialog}</body></html>`;
   const file = `${config.path.slice(1)}index.html`;
   await writeChanged(file,html);
